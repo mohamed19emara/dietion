@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dietitian Services</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #5b9aa0;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="number"], input[type="text"], input[type="email"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5b9aa0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #417a7a;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        /* Navbar styles */
+        nav {
+            background-color: #5b9aa0;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        /* Footer styles */
+        footer {
+            background-color: #5b9aa0;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+        footer p, footer a {
+            color: #fff;
+            font-size: 0.9em;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#bmi">BMI Calculator</a>
+        <a href="#appointment">Book Appointment</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- About Us Section -->
+        <div class="section" id="about">
+            <h2>About Us</h2>
+            <p>Welcome to our dietitian services! We are dedicated to helping you achieve your health and wellness goals through personalized diet plans and expert guidance. Our team of certified dietitians is here to support you on your journey to a healthier life.</p>
+        </div>
+
+        <!-- Services Section -->
+        <div class="section" id="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Personalized diet plans tailored to your health needs</li>
+                <li>Monthly follow-ups and progress tracking</li>
+                <li>Expert advice on weight management and nutrition</li>
+                <li>Specialized programs for different health goals</li>
+            </ul>
+        </div>
+
+        <!-- BMI Calculator Section -->
+        <div class="section" id="bmi">
+            <h2>BMI Calculator</h2>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" placeholder="Enter height in cm">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" placeholder="Enter weight in kg">
+            <button onclick="calculateBMI()">Calculate BMI</button>
+            <div class="result" id="bmi-result"></div>
+        </div>
+
+        <!-- Appointment Form Section -->
+        <div class="section" id="appointment">
+            <h2>Book an Appointment</h2>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Your full name">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Your email">
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date">
+            <button onclick="bookAppointment()">Submit</button>
+            <div class="result" id="appointment-result"></div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dietitian Services | <a href="mailto:info@dietitianservices.com">info@dietitianservices.com</a> | Follow us on 
+            <a href="#">Instagram</a> & <a href="#">Facebook</a>
+        </p>
+    </footer>
+
+    <script>
+        // JavaScript functions for BMI Calculation and Appointment Booking
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100;
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (height > 0 && weight > 0) {
+                const bmi = (weight / (height * height)).toFixed(2);
+                let category;
+
+                if (bmi < 18.5) category = "Underweight";
+                else if (bmi < 24.9) category = "Normal weight";
+                else if (bmi < 29.9) category = "Overweight";
+                else category = "Obesity";
+
+                document.getElementById('bmi-result').innerText = `Your BMI is ${bmi} (${category})`;
+            } else {
+                document.getElementById('bmi-result').innerText = "Please enter valid height and weight.";
+            }
+        }
+
+        function bookAppointment() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+
+            if (name && email && date) {
+                document.getElementById('appointment-result').innerText = `Appointment booked for ${name} on ${date}.`;
+            } else {
+                document.getElementById('appointment-result').innerText = "Please fill out all fields.";
+            }
+        }
+    </script>
+
+</body>
+</html>
